@@ -198,6 +198,40 @@ footer a {
   font-weight: 700;
 }
 
+.whatsapp-button {
+  align-items: center;
+  background: #1f9d55;
+  border-radius: 999px;
+  bottom: 1.5rem;
+  box-shadow: 0 8px 24px rgba(35, 32, 29, 0.22);
+  color: #fff;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.55rem;
+  padding: 0.85rem 1.1rem;
+  position: fixed;
+  right: 1.5rem;
+  text-decoration: none;
+  transition: background 160ms ease, transform 160ms ease;
+  z-index: 10;
+}
+
+.whatsapp-button:hover {
+  background: #167b40;
+  transform: translateY(-2px);
+}
+
+.whatsapp-button:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.whatsapp-button svg {
+  fill: currentColor;
+  height: 1.4rem;
+  width: 1.4rem;
+}
+
 .admin-page {
   align-items: center;
   display: flex;
@@ -445,6 +479,11 @@ footer a {
     flex-direction: column;
     gap: 0.7rem;
     padding: 1.5rem 1.3rem;
+  }
+
+  .whatsapp-button {
+    bottom: 1rem;
+    right: 1rem;
   }
 
   .admin-product {

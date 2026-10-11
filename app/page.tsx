@@ -73,7 +73,7 @@ export default function Home() {
             </button>
           ))}
         </div>
-        <a className="cta" href="https://walink.co/f5d465" rel="noreferrer" target="_blank">
+        <a className="cta" href="https://wa.me/542236303864" rel="noreferrer" target="_blank">
           Consultar por WhatsApp <span aria-hidden="true">↗</span>
         </a>
       </section>
@@ -150,6 +150,20 @@ export default function Home() {
           Seguinos en Instagram ↗
         </a>
       </footer>
+
+      <a
+        aria-label="Consultar por WhatsApp"
+        className="whatsapp-button"
+        href="https://wa.me/542236303864"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M12 3a9 9 0 0 0-7.7 13.65L3 21l4.57-1.22A9 9 0 1 0 12 3Z" />
+          <path d="M9.15 8.2c.2-.48.42-.5.7-.5h.45c.14 0 .35.05.44.35l.72 1.7c.09.22.05.4-.07.58l-.35.48c-.11.14-.23.3-.1.54.13.24.58.96 1.24 1.56.85.77 1.57 1 1.8 1.12.24.12.38.1.52-.06l.66-.77c.17-.2.35-.16.58-.08l1.67.78c.26.13.43.2.49.32.06.12.06.72-.17 1.4-.22.67-1.3 1.29-1.8 1.36-.46.06-1.05.09-1.69-.12a15.5 15.5 0 0 1-1.54-.57 12.2 12.2 0 0 1-4.68-4.12c-.29-.4-1.14-1.52-1.14-2.9s.72-2.06.98-2.34Z" />
+        </svg>
+        <span>WhatsApp</span>
+      </a>
     </main>
   );
 }
