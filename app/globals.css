@@ -156,10 +156,29 @@ h2 {
 
 .product-card {
   background: var(--paper);
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  width: 100%;
 }
 
 .product-card .post {
   margin: 0;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.03);
+}
+
+.product-image img {
+  transition: transform 160ms ease;
+}
+
+.product-card:focus-visible {
+  outline: 3px solid var(--clay);
+  outline-offset: 3px;
 }
 
 .product-details {
@@ -175,6 +194,104 @@ h2 {
 
 .product-details strong {
   color: var(--clay);
+}
+
+.product-detail-link {
+  color: var(--clay);
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0 0.85rem 0.85rem;
+}
+
+.product-modal {
+  align-items: center;
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1.5rem;
+  position: fixed;
+  z-index: 20;
+}
+
+.product-modal-backdrop {
+  background: rgba(35, 32, 29, 0.72);
+  border: 0;
+  cursor: default;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.product-modal-content {
+  background: var(--paper);
+  max-height: min(90vh, 760px);
+  max-width: 900px;
+  overflow: auto;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.product-modal-image {
+  aspect-ratio: 1 / 1;
+  position: relative;
+}
+
+.product-modal-image img {
+  object-fit: cover;
+}
+
+.product-modal-details {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
+}
+
+.product-modal-details .eyebrow {
+  margin: 0;
+}
+
+.product-modal-details h2 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+}
+
+.product-modal-details p:not(.eyebrow) {
+  line-height: 1.6;
+  margin: 0;
+}
+
+.product-modal-details strong {
+  color: var(--clay);
+  font-size: 1.3rem;
+}
+
+.product-modal-details a {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.product-modal-close {
+  align-items: center;
+  background: var(--paper);
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  font-size: 2rem;
+  height: 2.75rem;
+  justify-content: center;
+  line-height: 1;
+  position: absolute;
+  right: 0.75rem;
+  top: 0.75rem;
+  width: 2.75rem;
+  z-index: 2;
+}
+
+.product-modal-close:focus-visible {
+  outline: 3px solid var(--clay);
+  outline-offset: 2px;
 }
 
 .gallery-message {
@@ -451,6 +568,10 @@ footer a {
 @media (max-width: 850px) {
   .gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-modal-content {
+    max-width: 560px;
   }
 }
 

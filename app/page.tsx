@@ -17,8 +17,14 @@ const posts = [
   "https://www.instagram.com/mh.chick/p/CzV-WnyrbAH/embed/",
 ];
 
+const priceFormatter = new Intl.NumberFormat("es-AR", {
+  currency: "ARS",
+  style: "currency",
+});
+
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<ProductImage | null>(null);
   const [products, setProducts] = useState<ProductImage[]>([]);
   const [loadError, setLoadError] = useState("");
 
@@ -95,7 +101,13 @@ export default function Home() {
         {visibleProducts.length > 0 ? (
           <div className="gallery">
             {visibleProducts.map((product, index) => (
-              <article className="product-card" key={product.pathname}>
+              <button
+                aria-label={`Ver detalle de ${product.category}`}
+                className="product-card"
+                key={product.pathname}
+                onClick={() => setSelectedProduct(product)}
+                type="button"
+              >
                 <div className="post product-image">
                   <Image
                     alt={`${product.category}: ${product.description || "creación tejida por Mami Helena"}`}
@@ -109,17 +121,11 @@ export default function Home() {
                 {(product.description || product.price !== null) && (
                   <div className="product-details">
                     {product.description && <p>{product.description}</p>}
-                    {product.price !== null && (
-                      <strong>
-                        {new Intl.NumberFormat("es-AR", {
-                          currency: "ARS",
-                          style: "currency",
-                        }).format(product.price)}
-                      </strong>
-                    )}
+                    {product.price !== null && <strong>{priceFormatter.format(product.price)}</strong>}
                   </div>
                 )}
-              </article>
+                <span className="product-detail-link">Ver detalle</span>
+              </button>
             ))}
           </div>
         ) : selectedCategory ? (
@@ -143,6 +149,56 @@ export default function Home() {
           </div>
         )}
       </section>
+
+      {selectedProduct && (
+        <div
+          aria-labelledby="product-detail-title"
+          aria-modal="true"
+          className="product-modal"
+          role="dialog"
+        >
+          <button
+            aria-label="Cerrar detalle de la creación"
+            className="product-modal-backdrop"
+            onClick={() => setSelectedProduct(null)}
+            type="button"
+          />
+          <section className="product-modal-content">
+            <button
+              aria-label="Cerrar detalle de la creación"
+              className="product-modal-close"
+              onClick={() => setSelectedProduct(null)}
+              type="button"
+            >
+              ×
+            </button>
+            <div className="product-modal-image">
+              <Image
+                alt={`${selectedProduct.category}: ${
+                  selectedProduct.description || "creación tejida por Mami Helena"
+                }`}
+                fill
+                sizes="(max-width: 640px) 90vw, 460px"
+                src={selectedProduct.url}
+                unoptimized
+              />
+            </div>
+            <div className="product-modal-details">
+              <p className="eyebrow">{selectedProduct.category}</p>
+              <h2 id="product-detail-title">Detalle de la creación</h2>
+              <p>{selectedProduct.description || "Consultanos para conocer más sobre esta creación."}</p>
+              <strong>
+                {selectedProduct.price === null
+                  ? "Consultá el precio"
+                  : priceFormatter.format(selectedProduct.price)}
+              </strong>
+              <a href="https://wa.me/5492236203864" rel="noreferrer" target="_blank">
+                Consultar por WhatsApp <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      )}
 
       <footer>
         <p>© {new Date().getFullYear()} Mami Helena</p>
