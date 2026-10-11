@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-
-const categories = ["Polainas", "Gorros", "Mitones", "Ponchos"] as const;
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { categories, type Category, type ProductImage } from "../lib/catalog";
 
 const posts = [
   "https://www.instagram.com/mh.chick/p/Ci8Tg_ZP78J/embed/",
@@ -18,12 +18,37 @@ const posts = [
 ];
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState<(typeof categories)[number] | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [products, setProducts] = useState<ProductImage[]>([]);
+  const [loadError, setLoadError] = useState("");
 
-  function selectCategory(category: (typeof categories)[number]) {
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const response = await fetch("/api/products");
+        const result = (await response.json()) as { error?: string; products?: ProductImage[] };
+
+        if (!response.ok || !result.products) {
+          throw new Error(result.error ?? "No se pudieron cargar las creaciones.");
+        }
+
+        setProducts(result.products);
+      } catch (error) {
+        setLoadError(error instanceof Error ? error.message : "No se pudieron cargar las creaciones.");
+      }
+    }
+
+    void loadProducts();
+  }, []);
+
+  function selectCategory(category: Category) {
     setSelectedCategory(category);
     document.getElementById("galeria")?.scrollIntoView({ behavior: "smooth" });
   }
+
+  const visibleProducts = selectedCategory
+    ? products.filter((product) => product.category === selectedCategory)
+    : products;
 
   return (
     <main>
@@ -67,18 +92,41 @@ export default function Home() {
             </button>
           )}
         </div>
-        <div className="gallery">
-          {posts.map((post, index) => (
-            <article className="post" key={post}>
-              <iframe
-                allowFullScreen
-                loading={index > 2 ? "lazy" : "eager"}
-                src={post}
-                title={`Publicación ${index + 1} de Mami Helena`}
-              />
-            </article>
-          ))}
-        </div>
+        {visibleProducts.length > 0 ? (
+          <div className="gallery">
+            {visibleProducts.map((product, index) => (
+              <article className="post product-image" key={product.pathname}>
+                <Image
+                  alt={`${product.category} tejida por Mami Helena`}
+                  fill
+                  priority={index < 3}
+                  sizes="(max-width: 520px) 100vw, (max-width: 850px) 50vw, 20vw"
+                  src={product.url}
+                  unoptimized
+                />
+              </article>
+            ))}
+          </div>
+        ) : selectedCategory ? (
+          <p className="gallery-message">Todavía no hay creaciones publicadas en esta categoría.</p>
+        ) : loadError ? (
+          <p className="gallery-message" role="alert">
+            {loadError}
+          </p>
+        ) : (
+          <div className="gallery">
+            {posts.map((post, index) => (
+              <article className="post" key={post}>
+                <iframe
+                  allowFullScreen
+                  loading={index > 2 ? "lazy" : "eager"}
+                  src={post}
+                  title={`Publicación ${index + 1} de Mami Helena`}
+                />
+              </article>
+            ))}
+          </div>
+        )}
       </section>
 
       <footer>
