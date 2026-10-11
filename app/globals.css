@@ -154,6 +154,29 @@ h2 {
   object-fit: cover;
 }
 
+.product-card {
+  background: var(--paper);
+}
+
+.product-card .post {
+  margin: 0;
+}
+
+.product-details {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.85rem;
+}
+
+.product-details p {
+  line-height: 1.45;
+  margin: 0;
+}
+
+.product-details strong {
+  color: var(--clay);
+}
+
 .gallery-message {
   font-size: 1.05rem;
   line-height: 1.6;
@@ -210,14 +233,52 @@ footer a {
   gap: 0.55rem;
 }
 
+.category-picker {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.category-picker legend {
+  font-weight: 700;
+  margin-bottom: 0.55rem;
+  padding: 0;
+}
+
+.category-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.category-options button {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  padding: 0.7rem 0.9rem;
+}
+
+.category-options button:hover,
+.category-options button.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
 .upload-form input,
-.upload-form select {
+.upload-form select,
+.upload-form textarea {
   background: var(--paper);
   border: 1px solid var(--ink);
   border-radius: 0;
   color: var(--ink);
   font: inherit;
   padding: 0.8rem;
+}
+
+.upload-form textarea {
+  resize: vertical;
 }
 
 .upload-help {
@@ -269,6 +330,90 @@ footer a {
   position: absolute;
 }
 
+.publication-manager,
+.edit-publication {
+  border-top: 1px solid var(--line);
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+}
+
+.publication-manager h2,
+.edit-publication h2 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin-bottom: 1.5rem;
+}
+
+.admin-products {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-product {
+  background: var(--paper);
+  display: grid;
+  grid-template-columns: 112px 1fr;
+}
+
+.admin-product-image {
+  min-height: 150px;
+  position: relative;
+}
+
+.admin-product-image img {
+  object-fit: cover;
+}
+
+.admin-product-content {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem;
+}
+
+.admin-product-content p {
+  line-height: 1.4;
+  margin: 0;
+}
+
+.admin-product-category {
+  color: var(--clay);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-product-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.4rem;
+}
+
+.secondary-button,
+.delete-button {
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.65rem 0.8rem;
+}
+
+.secondary-button {
+  border: 1px solid var(--ink);
+  color: var(--ink);
+}
+
+.delete-button {
+  border: 1px solid #922d25;
+  color: #922d25;
+}
+
+.secondary-button:disabled,
+.delete-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
 @media (max-width: 850px) {
   .gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -300,5 +445,9 @@ footer a {
     flex-direction: column;
     gap: 0.7rem;
     padding: 1.5rem 1.3rem;
+  }
+
+  .admin-product {
+    grid-template-columns: 90px 1fr;
   }
 }

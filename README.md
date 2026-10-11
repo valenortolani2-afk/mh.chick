@@ -2,7 +2,7 @@
 
 ## Galería administrable
 
-Las imágenes de las creaciones se almacenan en Vercel Blob. El panel de carga está en `/admin` y permite elegir entre Polainas, Gorros, Mitones y Ponchos. Las imágenes publicadas aparecen automáticamente en la galería principal y al seleccionar una categoría.
+Las imágenes de las creaciones se almacenan en Vercel Blob. El panel de carga está en `/admin` y permite elegir entre Polainas, Gorros, Mitones y Ponchos, agregar su precio y descripción, y administrar las publicaciones existentes. Las imágenes publicadas aparecen automáticamente en la galería principal y al seleccionar una categoría.
 
 ### Conectar Vercel Blob
 

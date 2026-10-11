@@ -95,15 +95,30 @@ export default function Home() {
         {visibleProducts.length > 0 ? (
           <div className="gallery">
             {visibleProducts.map((product, index) => (
-              <article className="post product-image" key={product.pathname}>
-                <Image
-                  alt={`${product.category} tejida por Mami Helena`}
-                  fill
-                  priority={index < 3}
-                  sizes="(max-width: 520px) 100vw, (max-width: 850px) 50vw, 20vw"
-                  src={product.url}
-                  unoptimized
-                />
+              <article className="product-card" key={product.pathname}>
+                <div className="post product-image">
+                  <Image
+                    alt={`${product.category}: ${product.description || "creación tejida por Mami Helena"}`}
+                    fill
+                    priority={index < 3}
+                    sizes="(max-width: 520px) 100vw, (max-width: 850px) 50vw, 20vw"
+                    src={product.url}
+                    unoptimized
+                  />
+                </div>
+                {(product.description || product.price !== null) && (
+                  <div className="product-details">
+                    {product.description && <p>{product.description}</p>}
+                    {product.price !== null && (
+                      <strong>
+                        {new Intl.NumberFormat("es-AR", {
+                          currency: "ARS",
+                          style: "currency",
+                        }).format(product.price)}
+                      </strong>
+                    )}
+                  </div>
+                )}
               </article>
             ))}
           </div>
