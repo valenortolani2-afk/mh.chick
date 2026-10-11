@@ -73,7 +73,7 @@ export default function Home() {
             </button>
           ))}
         </div>
-        <a className="cta" href="https://wa.me/542236303864" rel="noreferrer" target="_blank">
+        <a className="cta" href="https://wa.me/5492236203864" rel="noreferrer" target="_blank">
           Consultar por WhatsApp <span aria-hidden="true">↗</span>
         </a>
       </section>
@@ -154,7 +154,7 @@ export default function Home() {
       <a
         aria-label="Consultar por WhatsApp"
         className="whatsapp-button"
-        href="https://wa.me/542236303864"
+        href="https://wa.me/5492236203864"
         rel="noreferrer"
         target="_blank"
       >
